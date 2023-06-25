@@ -22,6 +22,14 @@ document.getElementById('input-search').addEventListener('keyup', (e) => {
     }
 })
 
+
+function validateEmptyInput(userName) {
+    if(userName.length === 0) {
+        alert('Preencha o campo com o nome do usuário do GitHub.')
+        return true
+    }
+}
+
 async function getUserData(userName) {
     const userResponse = await getUser(userName)
 
@@ -31,21 +39,11 @@ async function getUserData(userName) {
     }
 
     const repoResponse = await getRepos(userName)
-
     const eventResponse = await getEvent(userName)
-
-    console.log(repoResponse)
 
     user.setInfo(userResponse)
     user.setRepositories(repoResponse)
     user.setEvents(eventResponse)
 
     screen.renderUser(user)
-}
-
-function validateEmptyInput(userName) {
-    if(userName.length === 0) {
-        alert('Preencha o campo com o nome do usuário do GitHub.')
-        return true
-    }
 }
